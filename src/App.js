@@ -69,8 +69,7 @@ const App = () => {
 
   const [bomb, setBomb] = useState(Math.floor(Math.random() * 9));
   const [treasure, setTreasure] = useState(Math.floor(Math.random() * 9));
-
-  console.log(`Bomb: ${bomb}, Treasure: ${treasure}`);
+  const [counter, setCounter] = useState(5);
 
   if (bomb === treasure && bomb > 0) {
     setBomb(bomb - 1);
@@ -87,12 +86,14 @@ const App = () => {
       board[index] = "🌴";
     }
     setBoard([...board]);
+    setCounter(counter - 1);
   };
 
   const restart = () => {
     setBoard(["❔", "❔", "❔", "❔", "❔", "❔", "❔", "❔", "❔"]);
     setBomb(Math.floor(Math.random() * 9));
     setTreasure(Math.floor(Math.random() * 9));
+    setCounter(5);
   };
 
   return (
@@ -113,7 +114,25 @@ const App = () => {
         })}
       </div>
       <div className="score">
-        <button onClick={() => restart()}>Play Again</button>
+        <button
+          style={{
+            width: `${vwEquivalent}vw`,
+            marginLeft: `${marginEquivalent}vw`,
+            marginRight: `${marginEquivalent}vw`,
+          }}
+          onClick={() => restart()}
+        >
+          Play Again
+        </button>
+        <h2
+          style={{
+            width: `${vwEquivalent}vw`,
+            marginLeft: `${marginEquivalent}vw`,
+            marginRight: `${marginEquivalent}vw`,
+          }}
+        >
+          Counter: {counter}
+        </h2>
       </div>
     </>
   );
