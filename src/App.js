@@ -67,8 +67,25 @@ const App = () => {
     "?",
   ]);
 
+  const [bomb, setBomb] = useState(Math.floor(Math.random() * 9));
+  const [treasure, setTreasure] = useState(Math.floor(Math.random() * 9));
+
+  console.log(`Bomb: ${bomb}, Treasure: ${treasure}`);
+
+  if (bomb === treasure && bomb > 0) {
+    setBomb(bomb - 1);
+  } else if (bomb === treasure && bomb === 0) {
+    setBomb(bomb + 1);
+  }
+
   const HandleClick = (index) => {
-    board[index] = "🌴";
+    if (index === bomb) {
+      board[index] = "💣";
+    } else if (index === treasure) {
+      board[index] = "💰";
+    } else {
+      board[index] = "🌴";
+    }
     setBoard([...board]);
   };
 
