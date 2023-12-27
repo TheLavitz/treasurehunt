@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Square from "./components/Square";
+import Score from "./components/Score";
 
 const App = () => {
   const [vwEquivalent, setVwEquivalent] = useState(11.25);
@@ -70,6 +71,7 @@ const App = () => {
   const [bomb, setBomb] = useState(Math.floor(Math.random() * 9));
   const [treasure, setTreasure] = useState(Math.floor(Math.random() * 9));
   const [counter, setCounter] = useState(5);
+  const [message, setMessage] = useState("Treasure Hunt Game");
 
   if (bomb === treasure && bomb > 0) {
     setBomb(bomb - 1);
@@ -78,15 +80,27 @@ const App = () => {
   }
 
   const HandleClick = (index) => {
-    if (index === bomb) {
+    let countDown = counter;
+    let gameMessage = message;
+    if (board.includes("💣") || board.includes("💰") || counter === 0) {
+      if (counter === 0) {
+        gameMessage = "Out of Turns";
+      }
+    } else if (index === bomb) {
       board[index] = "💣";
+      countDown = counter - 1;
+      gameMessage = "You Lose!";
     } else if (index === treasure) {
       board[index] = "💰";
+      countDown = counter - 1;
+      gameMessage = "You Win!";
     } else {
       board[index] = "🌴";
+      countDown = counter - 1;
     }
     setBoard([...board]);
-    setCounter(counter - 1);
+    setCounter(countDown);
+    setMessage(gameMessage);
   };
 
   const restart = () => {
@@ -94,11 +108,12 @@ const App = () => {
     setBomb(Math.floor(Math.random() * 9));
     setTreasure(Math.floor(Math.random() * 9));
     setCounter(5);
+    setMessage("Treasure Hunt Game");
   };
 
   return (
     <>
-      <h1>Treasure Hunt Game</h1>
+      <h1>{message}</h1>
       <div className="board">
         {board.map((board, index) => {
           return (
@@ -113,27 +128,12 @@ const App = () => {
           );
         })}
       </div>
-      <div className="score">
-        <button
-          style={{
-            width: `${vwEquivalent}vw`,
-            marginLeft: `${marginEquivalent}vw`,
-            marginRight: `${marginEquivalent}vw`,
-          }}
-          onClick={() => restart()}
-        >
-          Play Again
-        </button>
-        <h2
-          style={{
-            width: `${vwEquivalent}vw`,
-            marginLeft: `${marginEquivalent}vw`,
-            marginRight: `${marginEquivalent}vw`,
-          }}
-        >
-          Counter: {counter}
-        </h2>
-      </div>
+      <Score
+        viewWidth={vwEquivalent}
+        marginSide={marginEquivalent}
+        counter={counter}
+        restart={restart}
+      />
     </>
   );
 };
