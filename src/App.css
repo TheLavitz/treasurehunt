@@ -14,7 +14,7 @@ h1 {
 }
 
 .square:hover {
-  background-color: #f0f0f0;
+  background-color: rgb(156, 196, 209);
 }
 
 .board {

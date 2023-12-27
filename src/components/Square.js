@@ -1,6 +1,8 @@
 import React from "react";
 
 const Square = ({ board, index, click, viewWidth, marginSide }) => {
+  const fontSize = viewWidth / 1.1;
+
   return (
     <>
       <div
@@ -10,6 +12,7 @@ const Square = ({ board, index, click, viewWidth, marginSide }) => {
           width: `${viewWidth}vw`,
           marginLeft: `${marginSide}vw`,
           marginRight: `${marginSide}vw`,
+          fontSize: `${fontSize}vw`,
         }}
       >
         {board}
