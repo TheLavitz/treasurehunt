@@ -56,15 +56,15 @@ const App = () => {
   }, []);
 
   const [board, setBoard] = useState([
-    "?",
-    "?",
-    "?",
-    "?",
-    "?",
-    "?",
-    "?",
-    "?",
-    "?",
+    "❔",
+    "❔",
+    "❔",
+    "❔",
+    "❔",
+    "❔",
+    "❔",
+    "❔",
+    "❔",
   ]);
 
   const [bomb, setBomb] = useState(Math.floor(Math.random() * 9));
@@ -89,6 +89,12 @@ const App = () => {
     setBoard([...board]);
   };
 
+  const restart = () => {
+    setBoard(["❔", "❔", "❔", "❔", "❔", "❔", "❔", "❔", "❔"]);
+    setBomb(Math.floor(Math.random() * 9));
+    setTreasure(Math.floor(Math.random() * 9));
+  };
+
   return (
     <>
       <h1>Treasure Hunt Game</h1>
@@ -105,6 +111,9 @@ const App = () => {
             />
           );
         })}
+      </div>
+      <div className="score">
+        <button onClick={() => restart()}>Play Again</button>
       </div>
     </>
   );
