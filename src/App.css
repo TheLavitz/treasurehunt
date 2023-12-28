@@ -1,9 +1,11 @@
+/* Centers the text being used as a heading for the page */
 h1 {
   text-align: center;
 }
 
+/* Each square of the game board */
 .square {
-  height: 20vh;
+  height: 20vh; /* The height as well as margin-top and bottom are set here and the width and margin-left and right are set dynamically based off of these values to keep the board spaces square */
   border: 1px solid black;
   margin-top: 2.5vh;
   margin-bottom: 2.5vh;
@@ -13,10 +15,12 @@ h1 {
   cursor: pointer;
 }
 
+/* Changes the square background when the user hovers over it */
 .square:hover {
   background-color: rgb(156, 196, 209);
 }
 
+/* The div that contains the squares */
 .board {
   display: flex;
   flex-wrap: wrap;
@@ -24,6 +28,7 @@ h1 {
   justify-content: center;
 }
 
+/* The div that contains the Play Again button and Counter */
 .score {
   display: flex;
   justify-content: center;
